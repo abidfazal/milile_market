@@ -1,0 +1,265 @@
+body {
+    background-color: white;
+}
+
+.div {
+    display: flex;
+}
+
+.main {
+
+    width: 80%;
+
+    padding: 20px;
+    /* background-color: red; */
+}
+
+.header_nav {
+    width: 97%;
+    margin: auto;
+    padding: 10px;
+    /* background-color: black; */
+    text-align: center;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    height: 10px;
+}
+
+nav a {
+    text-decoration: none;
+    color: black;
+    padding: 10px;
+    font-size: 20px;
+}
+
+.header_div {
+    text-align: center;
+    width: 94%;
+    margin: auto;
+    /* background-image: url("https://media.istockphoto.com/id/1385042040/photo/hand-of-maid-washing-tomato-fresh-vegetables-preparation-healthy-food-in-kitchen.jpg?s=2048x2048&w=is&k=20&c=FCX9-Y5WMO-0Ba5UsLAyOua9hllXVGSinlzHzVkOGWg="); */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 20px;
+    /* border-bottom: 2px black solid;
+    border-left: 2px black solid;
+    border-right: 2px black solid; */
+    /* color: rgb(110, 10, 10); */
+    /* color: white; */
+    /* font-size: 22px; */
+    font-weight: bold;
+}
+
+.search {
+    width: 20rem;
+    height: 40px;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    border: 1px solid black;
+    padding: 10px;
+
+}
+
+.searchButton {
+    color: white;
+    height: 40px;
+    background-color: black;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    border: 1px solid black;
+    padding-left: 20px;
+    padding-right: 20px;
+    cursor: pointer;
+
+}
+
+nav a:hover {
+    background-color: white;
+    color: black;
+    border-radius: 20px;
+    transition: 0.5s;
+    font-size: 25px;
+    font-weight: bolder;
+
+}
+
+.logo {
+    border-radius: 150px;
+    border: 2px solid black;
+}
+
+.navAndLogo {
+    /* background-color: blanchedalmond; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 95%;
+    margin: auto;
+    padding: 30px;
+}
+
+.navLogo {
+    height: 80px;
+    width: 80px;
+    border-radius: 80px;
+}
+
+.login {
+    background-color: green;
+    color: white;
+    font-weight: bolder;
+    padding: 10px;
+    width: 80px;
+    text-align: center;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+.register {
+    background-color: black;
+    color: white;
+    font-weight: bolder;
+    padding: 10px;
+    width: 80px;
+    text-align: center;
+    border-radius: 5px;
+    text-decoration: none;
+}
+ .login:hover {
+    background-color: rgb(17, 182, 17);
+    transition: 0.5s;
+    /* font-size: 25px; */
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.register:hover {
+    background-color: rgb(113, 112, 112);
+    transition: 0.5s;
+    padding-left: 25px;
+    padding-right: 25px; 
+}
+
+
+.cart {
+/* display: flex; */
+  max-width: 200px;
+  margin: 2rem ;
+  padding: 1rem;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: sans-serif;
+}
+
+
+
+.product-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+
+.product-title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.product-price {
+  color: #888;
+  margin: 0.25rem 0;
+}
+.description {
+  font-size: 0.8rem;
+  font-family: sans-serif;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.order-btn {
+    background-color: black;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bolder;
+}
+.order-btn:hover {
+    background-color: rgb(70, 69, 69);
+    color: white;
+    transition: 0.5s;
+    padding-left: 23px;
+    padding-right: 23px;
+
+}
+.footer {
+    background-color: rgb(81, 80, 80);
+    color: white;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+    bottom: 0;
+    width: 97%;
+    margin: auto;
+}
+/* .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    margin: 20px auto;
+    width: 90%;
+} */
+
+.add-to-cart-btn {
+    background-color: orange;
+    color: white;
+    border: none;
+    font-weight: bolder;
+    /* padding-left: 25px;
+    padding-right: 25px; */
+}
+
+.add-to-cart-btn:hover {
+    background-color: rgb(255, 165, 0);
+    color: white;
+    width: 100px;
+    font-size: 10px;
+    transition: 0.5s;
+    /* padding-left: 20px;
+    padding-right: 20px; */
+    
+    cursor: pointer;
+
+}
+
+.form-control {
+    width: 50%;
+
+}
+
+.form {
+    width: 60%;
+    margin: auto;
+}
+.form-div {
+    width: 80%;
+    margin: auto;
+    border-radius: 10px;
+    text-align: center;
+    border: 4px black solid;
+}
+
+.name {
+    display: flex;
+    margin: auto;
+    height: 40px;
+    border-radius: 20px;
+    padding-left: 10px;
+}
+.desc {}

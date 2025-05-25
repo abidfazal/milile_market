@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{%block content%}
+<div class="form-div">
+<form method="post" enctype="multipart/form-data" action="{% url 'add_item' %}" class="form">
+  {% csrf_token %}
+  {{form}}
+  {% comment %} <div>
+    {{form.name.label_tag}}
+    <div>{{form.name}}</div>
+  </div>
+  <div>
+    {{form.price.label_tag}}
+    {{form.price}}
+  </div>
+  <div>
+    {{form.description.label_tag}}
+    {{form.description}}
+  </div>
+  <div>
+    {{form.catagory.label_tag}}
+    {{form.catagory}}
+  </div>
+  <div>
+    {{form.type.label_tag}}
+    {{form.type}}
+  </div>
+  <div>
+    {{form.image.label_tag}}
+    {{form.image}}
+  </div> {% endcomment %}
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>
+{% endblock %}

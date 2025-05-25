@@ -1,0 +1,31 @@
+<header>
+    <div class="navAndLogo">
+        <div class="logo_div">
+            {% load static %}
+            <a href="#"><img src="{% static 'logo/logo.webp' %}" alt="Logo" class="navLogo" width="20px" height="20px"></a>
+        </div>
+    <nav class="header_nav">
+        <a href="#">home</a>
+        <a href="#">About Us</a>
+        <a href="{% url 'add_item' %}">Add New Item</a>
+        <a href="#">Carreer</a>
+    </nav>
+    <div style="display: flex;  gap: 10px;">
+        <p><a href="#"  class="login">Login</a></p>
+        <p><a href="#" class="register">Register</a></p>
+
+    </div>
+    </div>
+    <div class="header_div">
+        <h1 >Welcome Milele Shoping </h1>
+        {% load static %}
+        <img src="{% static 'logo/logo.webp' %}" alt="Logo" class="logo" width="150px" height="150px">
+        <br>
+        <br>
+        <form action="#">
+            <input class="search" type="text" placeholder="Search..."><button class="searchButton" type="submit">Search</button>
+
+            
+        </form>
+    </div>
+</header>

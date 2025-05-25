@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{%block content%}
+{% include 'partials/_header.html' %}
+{% if data %}
+<h2 style="font-family: sans-serif; font-weight: bolder; margin-left: 10px;">Deals Recommended For You</h2>
+
+    <div class="div">
+    {% for item in data %}
+    {% if item.type == 'deal'%}
+    <div class="cart">
+        <img src="{{item.image.url}}" alt="{{item.name}} image" width="200px" height="200px">
+        <h3 class="product-title">{{ item }}</h3>
+        <p class="product-price">${{item.price}}</p>
+        <p class="description">{{item.description}}</p>
+        <div style="display: flex; gap: 25px;">
+        <button class="Order-btn">Details</button>
+        <button class="add-to-cart-btn">Add To Cart</button>
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+    </div>
+
+<h2 style="font-family: sans-serif;font-weight: bolder; margin-left: 10px; " >Latest Fast Food Collection</h2>
+<div class="div">
+        {% for item in data %}
+    {% if item.type != 'deal'%}
+        <div class="cart"> 
+        <img src="{{item.image.url}}" alt="{{item.name}} image" width="200px" height="200px">
+        <h3 class="product-title">{{ item }}</h3>
+        <p class="product-price">${{item.price}}</p>
+        <p class="description">{{item.description}}</p>
+        <div style="display: flex; gap: 25px;">
+        <button class="Order-btn">Details</button>
+        <button class="add-to-cart-btn">Add To Cart</button>
+        </div>
+</div>
+    {% endif %}
+    {% endfor %}
+</div>
+{% else %}
+<h3 style="text-align: center;">No data available.</h3>
+    </div>
+{% endif %}
+
+{% endblock %}
+
+
+
+
+
+
+
