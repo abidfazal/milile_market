@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
 {%block content%}
 {% include 'partials/_header.html' %}
+{% load static %}
 {% if data %}
 <h2 style="font-family: sans-serif; font-weight: bolder; margin-left: 10px;">Deals Recommended For You</h2>
 
     <div class="div">
+        {% load static %}
     {% for item in data %}
     {% if item.type == 'deal'%}
     <div class="cart">
@@ -14,7 +16,9 @@
         <p class="description">{{item.description}}</p>
         <div style="display: flex; gap: 25px;">
         <button class="Order-btn">Details</button>
-        <button class="add-to-cart-btn">Add To Cart</button>
+        <button class="add-to-cart-btn" data-id="{{ item.id }}" data-url="{% url 'add_to_cart' item.id %}">
+            Add To Cart
+        </button>
         </div>
     </div>
     {% endif %}
@@ -23,16 +27,20 @@
 
 <h2 style="font-family: sans-serif;font-weight: bolder; margin-left: 10px; " >Latest Fast Food Collection</h2>
 <div class="div">
+    {% load static %}
         {% for item in data %}
     {% if item.type != 'deal'%}
         <div class="cart"> 
+            
         <img src="{{item.image.url}}" alt="{{item.name}} image" width="200px" height="200px">
         <h3 class="product-title">{{ item }}</h3>
         <p class="product-price">${{item.price}}</p>
         <p class="description">{{item.description}}</p>
         <div style="display: flex; gap: 25px;">
         <button class="Order-btn">Details</button>
-        <button class="add-to-cart-btn">Add To Cart</button>
+        <button class="add-to-cart-btn" data-id="{{ item.id }}" data-url="{% url 'add_to_cart' item.id %}">
+        Add To Cart
+        </button>
         </div>
 </div>
     {% endif %}
@@ -42,6 +50,48 @@
 <h3 style="text-align: center;">No data available.</h3>
     </div>
 {% endif %}
+
+<script>
+    document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+        button.addEventListener('click', event => {
+            event.preventDefault();
+            const url = button.dataset.url;
+
+            Swal.fire({
+                title: 'Success!',
+                text: 'Item added to cart.',
+                icon: 'success',
+                confirmButtonText: 'OK',
+                timer: 2500,
+                showConfirmButton: false,
+                position: 'top-center',
+                toast: true,
+                background: 'orange',
+                color: 'white',
+            });
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}',
+                    'Accept': 'application/json',
+                },
+                body: JSON.stringify({ quantity: 1 })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    console.log(data.message);
+                } else {
+                    console.error(data.message);
+                }
+            })
+            .catch(error => console.error('Request error:', error));
+        });
+    });
+</script>
+
 
 {% endblock %}
 

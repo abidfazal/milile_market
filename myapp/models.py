@@ -18,3 +18,13 @@ class Menu(models.Model):
     
     def __str__(self):
         return self.name
+    
+class Cart(models.Model):
+    menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+    
+    def __str__(self):
+        return f"{self.menu.name} - {self.quantity}"
+    
+    class Meta:
+        verbose_name_plural = "Carts"

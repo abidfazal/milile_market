@@ -1,7 +1,10 @@
 from django.shortcuts import render,redirect
-from django.http import HttpResponse
-from .models import Menu,MenuCatagory
+from django.http import HttpResponse,JsonResponse
+from .models import Menu,MenuCatagory,Cart
 from .forms import MenuForm
+import json
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
 
 # Create your views here.
 def home(reqiest):
@@ -36,3 +39,25 @@ def add_item(request):
         }
 
         return render(request, 'add_items_page.html', context)
+
+
+@require_POST
+@csrf_exempt  # Optional if you're already handling CSRF via fetch (which you are)
+def add_to_cart(request, item_id):
+    try:
+        data = json.loads(request.body)
+        quantity = int(data.get('quantity', 1))
+        menu_item = Menu.objects.get(id=item_id)
+
+        cart_item, created = Cart.objects.get_or_create(menu=menu_item, defaults={'quantity': quantity})
+        if not created:
+            cart_item.quantity += quantity
+            cart_item.save()
+
+        return JsonResponse({'status': 'success', 'message': 'Item added to cart'})
+
+    except Menu.DoesNotExist:
+        return JsonResponse({'status': 'error', 'message': 'Item not found'}, status=404)
+
+    except Exception as e:
+        return JsonResponse({'status': 'error', 'message': str(e)}, status=400)

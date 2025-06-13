@@ -1,9 +1,12 @@
 body {
     background-color: white;
+    margin: 0;
 }
 
 .div {
     display: flex;
+    flex-wrap: wrap;
+
 }
 
 .main {
@@ -125,7 +128,7 @@ nav a:hover {
     border-radius: 5px;
     text-decoration: none;
 }
- .login:hover {
+.login:hover {
     background-color: rgb(17, 182, 17);
     transition: 0.5s;
     /* font-size: 25px; */
@@ -143,13 +146,13 @@ nav a:hover {
 
 .cart {
 /* display: flex; */
-  max-width: 200px;
-  margin: 2rem ;
-  padding: 1rem;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  font-family: sans-serif;
+    max-width: 200px;
+    margin: 2rem ;
+    padding: 1rem;
+    background: #f0ebeb;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: sans-serif;
 }
 
 
@@ -198,7 +201,8 @@ nav a:hover {
 
 }
 .footer {
-    background-color: rgb(81, 80, 80);
+    background-color: black;
+    font-family: sans-serif;
     color: white;
     text-align: center;
     padding: 20px;
@@ -206,6 +210,18 @@ nav a:hover {
     bottom: 0;
     width: 97%;
     margin: auto;
+}
+
+.footer-link {
+    /* justify-content: space-between; */
+    display: flex;
+    justify-content: center;
+}
+.footer-link a {
+    text-decoration: none;
+    color: white;
+    margin: 0 10px;
+    font-weight: bolder;
 }
 /* .container {
     display: flex;
@@ -262,4 +278,3 @@ nav a:hover {
     border-radius: 20px;
     padding-left: 10px;
 }
-.desc {}
