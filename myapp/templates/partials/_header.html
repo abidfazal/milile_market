@@ -7,7 +7,7 @@
     <nav class="header_nav">
         <a href="#">home</a>
         <a href="#">About Us</a>
-        <a href="{% url 'add_item' %}">Add New Item</a>
+        <a href="{% url 'add_item' %}">Orders</a>
         <a href="#">Carreer</a>
         <a href="#">Cart</a>
     </nav>
@@ -16,17 +16,5 @@
         <p><a href="#" class="register">Register</a></p>
 
     </div>
-    </div>
-    <div class="header_div">
-        <h1 >Welcome Milele Shoping </h1>
-        {% load static %}
-        <img src="{% static 'logo/logo.webp' %}" alt="Logo" class="logo" width="150px" height="150px">
-        <br>
-        <br>
-        <form action="#">
-            <input class="search" type="text" placeholder="Search..."><button class="searchButton" type="submit">Search</button>
-
-            
-        </form>
     </div>
 </header>

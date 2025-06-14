@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% block content %}
+{% include 'partials/_header.html' %}
+<h1 style="font-family: sans-serif; margin-left: 10px ;">Item Details</h1>
+<div class="main_div">
+{% load static %}
+<div><img src="{{ item.image.url }}"  alt="{{item.name}} image" width="400px" height="400px"></div>
+<div>
+<h2>{{ item.name }}</h2>
+<p>{{ item.description }}</p>
+<p style="color: #888; ;">${{ item.price }}</p>
+<button  id="buyNowBtn"  class="buy-now-btn" >Buy Now</button>
+</div>
+</div>
+{% if related_items %}
+<h1 style="font-family: sans-serif; margin-left: 10px ; text-decoration: underline;">Food You May Also Like</h1>
+<div>
+    <div class="div">
+        {% load static %}
+        {% for similar_item in related_items %}
+        <div class="cart">
+            <img src="{{similar_item.image.url}}" alt="{{similar_item.name}} image" width="200px" height="200px">
+            <h3 class="product-title">{{ similar_item }}</h3>
+            <p class="product-price">${{similar_item.price}}</p>
+            <p class="description">{{similar_item.description}}</p>
+            <div style="display: flex; gap: 25px;">
+                <a href="{% url 'item_details' similar_item.id %}"><button class="Order-btn">Details</button></a>
+                <button class="add-to-cart-btn" data-id="{{ similar_item.id }}" data-url="{% url 'add_to_cart' similar_item.id %}">
+                    Add To Cart
+                </button>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif%}
+ <div id="popupOverlay">
+    <div id="popupForm">
+      <h3>Enter Your Details</h3>
+      <form id="orderForm">
+        <label>Phone Number</label>
+        <input type="text" name="phone" required>
+        <label id="quantity">Quantity</label>
+        <input type="number" name="quantity" id="quantity" min="1" value="1" required>
+        <label>Address</label>
+        <textarea name="address" required></textarea>
+
+        <button type="submit">Submit</button>
+        <button type="button" onclick="closePopup()">Cancel</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const buyNowBtn = document.getElementById('buyNowBtn');
+    const popupOverlay = document.getElementById('popupOverlay');
+    const popupForm = document.getElementById('popupForm');
+    const orderForm = document.getElementById('orderForm');
+
+    buyNowBtn.addEventListener('click', () => {
+      popupOverlay.classList.add('active');
+    });
+
+    function closePopup() {
+      popupOverlay.classList.remove('active');
+      orderForm.reset();
+    }
+
+    orderForm.addEventListener('submit', async function(event) {
+    event.preventDefault();
+
+    const formData = new FormData(orderForm);
+    const phone = formData.get('phone');
+    const address = formData.get('address');
+    const quantity = formData.get('quantity');
+
+    try {
+        const response = await fetch('{% url 'order' item.id %}', {
+    method: 'POST',
+    headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-CSRFToken': getCSRFToken(),
+     },
+          body: JSON.stringify({
+            phone,
+            address,
+            quantity
+            
+          })
+        });
+
+        if (response.ok) {
+          alert('Order placed successfully!');
+          closePopup();
+        } else {
+          alert('Error placing order.');
+        }
+      } catch (error) {
+        console.error('Fetch error:', error);
+        alert('Network error.');
+      }
+    });
+  </script>
+{% endblock %}

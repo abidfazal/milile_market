@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse,JsonResponse
-from .models import Menu,MenuCatagory,Cart
+from .models import Menu,MenuCatagory,Cart, Order
 from .forms import MenuForm
 import json
 from django.views.decorators.csrf import csrf_exempt
@@ -61,3 +61,35 @@ def add_to_cart(request, item_id):
 
     except Exception as e:
         return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
+    
+
+def item_details(request, item_id):
+    try:
+        item = Menu.objects.get(id=item_id)
+        related_items = Menu.objects.filter(catagory=item.catagory).exclude(id=item_id)[:4]  # Get 4 related items
+        context = {
+            'item': item,
+            'related_items': related_items
+        }
+        return render(request, 'items_details.html', context)
+    except Menu.DoesNotExist:
+        return HttpResponse("Item not found", status=404)
+
+
+@require_POST
+@csrf_exempt  
+def order_item(request, item_id):
+    print("Order item view called")
+    try:
+        data = json.loads(request.body)
+        address = data.get('address', 'No address provided')
+        quantity = int(data.get('quantity', 1))
+        phone = data.get('phone', 'No phone number provided')
+        item = Menu.objects.get(id=item_id)
+        order_item = Order(menu=item, quantity=quantity, address=address, phone=phone)
+        order_item.save()
+        return redirect('home')  # Redirect to home or wherever you want after ordering
+    except Menu.DoesNotExist:
+        return HttpResponse("Item not found", status=404)
+    except Exception as e:
+        return HttpResponse(f"An error occurred: {str(e)}", status=500)

@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {%block content%}
 {% include 'partials/_header.html' %}
+{% include 'partials/_search_field.html' %}
 {% load static %}
 {% if data %}
 <h2 style="font-family: sans-serif; font-weight: bolder; margin-left: 10px;">Deals Recommended For You</h2>
@@ -15,7 +16,7 @@
         <p class="product-price">${{item.price}}</p>
         <p class="description">{{item.description}}</p>
         <div style="display: flex; gap: 25px;">
-        <button class="Order-btn">Details</button>
+        <a href="{% url 'item_details' item.id %}"><button class="Order-btn">Details</button></a>
         <button class="add-to-cart-btn" data-id="{{ item.id }}" data-url="{% url 'add_to_cart' item.id %}">
             Add To Cart
         </button>
@@ -37,7 +38,7 @@
         <p class="product-price">${{item.price}}</p>
         <p class="description">{{item.description}}</p>
         <div style="display: flex; gap: 25px;">
-        <button class="Order-btn">Details</button>
+        <a href="{% url 'item_details' item.id %}"><button class="Order-btn">Details</button></a>
         <button class="add-to-cart-btn" data-id="{{ item.id }}" data-url="{% url 'add_to_cart' item.id %}">
         Add To Cart
         </button>

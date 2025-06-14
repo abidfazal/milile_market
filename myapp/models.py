@@ -19,6 +19,18 @@ class Menu(models.Model):
     def __str__(self):
         return self.name
     
+class Order(models.Model):
+    menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
+    address = models.CharField(max_length=255, default='No address provided')
+    phone = models.CharField(max_length=15, default='No phone number provided')
+    
+    def __str__(self):
+        return f"{self.menu.name} - {self.quantity}"
+    
+    class Meta:
+        verbose_name_plural = "Orders"
+    
 class Cart(models.Model):
     menu = models.ForeignKey(Menu, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
