@@ -1,12 +1,51 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse,JsonResponse
 from .models import Menu,MenuCatagory,Cart, Order
-from .forms import MenuForm
+from .forms import MenuForm,userLoginForm,userRegistrationForm
 import json
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
+from django.contrib.auth import login,logout
+
 
 # Create your views here.
+
+def register_view(request):
+    if request.method == 'POST':
+        form = userRegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')  # Redirect to login page after successful registration
+    else:
+        form = userRegistrationForm()
+    
+    context = {
+        'form': form,
+    }
+    return render(request, 'registration/signup.html', context)
+
+def login_view(request):
+    if request.method == 'POST':
+        form = userLoginForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = form.get_user()
+            if user is not None:
+                login(request, user)
+                return redirect('/') 
+    else:
+        form = userLoginForm()
+    
+    context = {
+        'form': form,
+    }
+    return render(request, 'registration/login.html', context)
+
+def logout_view(request):
+    logout(request)
+    return redirect('login_view')  # Redirect to login page after logout
+
 def home(reqiest):
     data = Menu.objects.all()
     context = {
@@ -93,3 +132,4 @@ def order_item(request, item_id):
         return HttpResponse("Item not found", status=404)
     except Exception as e:
         return HttpResponse(f"An error occurred: {str(e)}", status=500)
+    

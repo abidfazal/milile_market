@@ -7,14 +7,23 @@
     <nav class="header_nav">
         <a href="#">home</a>
         <a href="#">About Us</a>
+        {% if user.is_authenticated %}
         <a href="{% url 'add_item' %}">Orders</a>
-        <a href="#">Carreer</a>
         <a href="#">Cart</a>
+        {% endif %}
+        <a href="#">Carreer</a>
+        
     </nav>
+    {% if user.is_authenticated %}
+        <div class="user_info">
+            <p><a href="{% url 'logout_view'  %}"  class="login" style="background-color:darkred;">Logout</a></p>
+        </div>
+    {% else %}
     <div style="display: flex;  gap: 10px;">
-        <p><a href="#"  class="login">Login</a></p>
-        <p><a href="#" class="register">Register</a></p>
-
+        <p><a href="{% url 'login_view'  %}"  class="login">Login</a></p>
+        <p><a href="{% url 'register' %}" class="register">Register</a></p>
     </div>
+    {% endif %}
+
     </div>
 </header>

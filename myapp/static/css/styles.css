@@ -3,6 +3,10 @@ body {
     margin: 0;
 }
 
+* {
+    width: 100%;
+    margin: 0;
+}
 .div {
     display: flex;
     flex-wrap: wrap;
@@ -144,8 +148,8 @@ nav a:hover {
 }
 
 
-.cart {
-/* display: flex; */
+.item-cart {
+    display: flex;
     max-width: 200px;
     margin: 2rem ;
     padding: 1rem;
@@ -282,7 +286,7 @@ nav a:hover {
 .main_div {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-evenly;
     margin: 10px auto;
     background-color: rgb(230, 227, 227);
     padding: 20px;
